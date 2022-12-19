@@ -6,39 +6,43 @@ from django.db.models.signals import post_save, post_delete
 from datetime import date
 import datetime as dt
 
+
 class City(models.Model):
     name = models.CharField(max_length=30)
 
     def __str__(self):
         return f"[{self.name}]"
 
+
 class User(AbstractUser):
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     pass
+
 
 class Theatre(models.Model):
     name = models.CharField(max_length=30)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"[{self.name}] - {self.city}"
+        return f"[{self.name}] _ {self.city}"
+
 
 class Hall(models.Model):
 
     HALL_TYPES = [
-    ('2D', '2D'),
-    ('3D', '3D'),
-    ('4DX', '4DX'),
-    ('IMAX', 'IMAX'),
+        ('2D', '2D'),
+        ('3D', '3D'),
+        ('4DX', '4DX'),
+        ('IMAX', 'IMAX'),
     ]
 
     name = models.CharField(max_length=30)
     hall_type = models.CharField(max_length=4, choices=HALL_TYPES)
     theatre = models.ForeignKey(Theatre, on_delete=models.CASCADE)
 
-
     def __str__(self):
-        return f"[{self.name} |{self.hall_type}] - {self.theatre}"
+        return f"[{self.name} | {self.hall_type}] - {self.theatre}"
+
 
 class Movie(models.Model):
     name = models.CharField(max_length=30)
@@ -50,7 +54,7 @@ class Movie(models.Model):
 
 
 def emptyAllSeats():
-    seat_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    # seat_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     seatDict = {}
     number = {}
@@ -64,9 +68,11 @@ def emptyAllSeats():
 
     return seatDict
 
+
 class Show(models.Model):
 
-    HOUR_CHOICES = [(dt.time(hour=x), f'{y}') for x,y in [ (9, '9:00 AM'), (12, '12:00 PM'), (15, '3:00 PM'), (18, '6:00 PM'), (21, '9:00 PM')]]
+    HOUR_CHOICES = [(dt.time(hour=x), f'{y}') for x, y in [
+        (9, '9:00 AM'), (12, '12:00 PM'), (15, '3:00 PM'), (18, '6:00 PM'), (21, '9:00 PM')]]
 
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
@@ -89,7 +95,7 @@ class Show(models.Model):
             "current_time": localtime().time(),
             "rate": self.rate
         }
-    
+
     def __str__(self):
         return f"[{self.movie}] - [ {self.date.strftime('%d %B, %Y')} ]"
 
@@ -107,14 +113,18 @@ class Show(models.Model):
     def is_days_ahead(self):
         return date.today() < self.date
 
+
 def createTheater(sender, instance, **kwargs):
-    hall_types = [{'2D':'Hall 1'}, {'3D':'Hall 2'}, {'4DX':'Hall 3'}, {'IMAX':'Hall 4'}]
+    hall_types = [{'2D': 'Hall 1'}, {'3D': 'Hall 2'},
+                  {'4DX': 'Hall 3'}, {'IMAX': 'Hall 4'}]
 
     for entry in hall_types:
-        for (key,value) in entry.items():
+        for (key, value) in entry.items():
             Hall.objects.create(name=value, hall_type=key, theatre=instance)
 
+
 post_save.connect(createTheater, sender=Theatre)
+
 
 class Ticket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -125,9 +135,11 @@ class Ticket(models.Model):
     def __str__(self):
         return f"[{self.user}] - {self.seat} - {self.show}"
 
+
 def deleteTicket(sender, instance, **kwargs):
     currentShow = Show.objects.get(pk=instance.show.id)
     currentShow.seats = emptyAllSeats()
     currentShow.save()
+
 
 post_delete.connect(deleteTicket, sender=Ticket)
