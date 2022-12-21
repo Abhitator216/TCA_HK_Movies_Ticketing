@@ -28,13 +28,11 @@
                                 <div class="left">
                                     <ul>
                                         <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
-                                        <li><span class="bold">Seat(s):</span> {% for key, seatList in ticket.seat.items %}
-                                                        {% for seat in seatList %}
-                                                            {% if forloop.last %}
-                                                                {{ seat }}
-                                                            {% else %}
-                                                                {{ seat }},
-                                                            {% endif %}
+                                          {% comment %} <li><span class="bold">Customer:</span> {{ ticket.seat}}</li>   {% endcomment %}
+                                 <li><span class="bold">Seat(s):</span> 
+                                 {% for dict in ticket.seat %}
+                                                        {% for key,val in dict.items %}  
+                                                             {{key}}{{val}}
                                                         {% endfor %}
                                                     {% endfor %}
                                         </li>

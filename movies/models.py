@@ -83,7 +83,7 @@ class Show(models.Model):
 
     def serialize(self):
         return {
-            # "id": self.id,
+            "id": self.id,
             "theatre": self.hall.theatre.name,
             "seats": self.seats,
             "hall_type": self.hall.hall_type,
@@ -91,7 +91,7 @@ class Show(models.Model):
             "date_display": self.date.strftime('%d %b, %Y'),
             "today": date.today(),
             "time": self.time,
-            # "time_display": self.,
+            "time_display": self.time,
             "current_time": localtime().time(),
             "rate": self.rate
         }

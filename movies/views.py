@@ -41,6 +41,12 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("login"))
 
+
+
+def layout(request):
+    return render(request,"movies/layout.html")
+
+
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -106,7 +112,7 @@ def results(request, query):
                 results.append(movie)
 
         if len(results) == 0:
-            messages.error(request, 'Error: No such movie currently exists.')
+            messages.error(request, 'No such movie currently exists.')
             return redirect(reverse(error))
 
         else:
@@ -170,7 +176,6 @@ def shows(request, movie, city, day, hall):
     date = datetime_obj.date()
     movie_obj = Movie.objects.get(name=movie)
     shows = Show.objects.filter(movie=movie_obj, hall__id__in=halls, date=date)
-    
     return JsonResponse([show.serialize() for show in shows], safe=False)
 
 def seats(request, show):
