@@ -54,14 +54,14 @@ class Movie(models.Model):
 
 
 def emptyAllSeats():
-    # seat_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    seat_rows = ['B', 'C', 'D', 'E', 'F', 'G','H','I','J','K','L','M','N','O','P','Q']
 
     seatDict = {}
     number = {}
-    seat_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    # seat_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G','H']
 
     for row in seat_rows:
-        for seatNumber in range(1, 9):
+        for seatNumber in range(1, 22):
             number[seatNumber] = 'Vacant'
 
         seatDict[row] = number

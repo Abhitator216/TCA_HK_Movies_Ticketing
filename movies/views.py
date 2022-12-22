@@ -133,7 +133,7 @@ def bookTicket(request, movieName):
 
     dayList = []
 
-    for i in range(6):
+    for i in range(30):
         new_date = today + timedelta(days=i+1)
         dayList.append(new_date.strftime('%d %B, %Y'))
 

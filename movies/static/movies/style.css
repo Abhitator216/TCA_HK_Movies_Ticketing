@@ -8,7 +8,7 @@
   left: 0;
   top: 0;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow: auto;
   color: #fff;
   flex-direction: column;
@@ -20,10 +20,9 @@
 
 .modalContent{
   background-color: #000000c7;
-  margin: 30% auto;
-  width: 70%;
+  margin: auto;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
-  border-radius: 8px;
+  border-radius: 8px; 
   min-height: fit-content;
   animation-name: modalopen;
   animation-duration: 0.4s;
@@ -32,7 +31,12 @@
   display: flex;
   flex-direction: row;
 }
-
+@media only screen and (min-width: 600px) {
+  .modalContent {
+  width: 100%;
+    /* background-color: lightblue; */
+  }
+}
 @keyframes modalopen {
   from {opacity: 0;}
   to {opacity: 1;}
@@ -40,7 +44,7 @@
 
 #modalInner {
   flex: 70%;
-  width: fit-content;
+  width: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,7 +112,7 @@
   background-color: #444451;
 }
 
-.seat:nth-of-type(2) {
+.seat:nth-of-type(4) {
   margin-right: 18px;
 }
 
@@ -160,3 +164,55 @@
   box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
 }
 
+.verticalLine {
+  height: 5.5em;
+  /* border-right: solid #0bc0f2; */
+  position: absolute;
+  right: 96%;
+  width: 1.25em;
+  writing-mode: vertical-rl;
+  background: #0bc0f2;
+  text-align: center;
+  color: purple;
+  font-weight: bold;
+}
+.urli {
+  height: 5.5em;
+  width: 1.25em;
+  writing-mode: vertical-rl;
+  background: #0bc0f2;
+  text-align: center;
+  /* width: 2em; */
+  position: absolute;
+  right: 0%;
+  color: purple;
+  font-weight: bold;
+}
+.drli {
+  height: 10em;
+  width: 1.25em;
+  writing-mode: vertical-rl;
+  background: #0ff20b;
+  text-align: center;
+  /* width: 2em; */
+  padding-top: 2.3em;
+  position: absolute;
+  right: 0%;
+  margin-top: 5.5em;
+  color: purple;
+  font-weight: bold;
+}
+.dvl {
+  height: 10em;
+  width: 1.25em;
+  writing-mode: vertical-rl;
+  background: #0ff20b;
+  text-align: center;
+  /* width: 2em; */
+  padding-top: 2.3em;
+  position: absolute;
+  margin-top: 5.5em;
+  right: 96%;
+  color: purple;
+  font-weight: bold;
+}

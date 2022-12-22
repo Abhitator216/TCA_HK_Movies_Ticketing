@@ -110,10 +110,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if ( e.target.classList.contains('seat') && !e.target.classList.contains('occupied') ) {
       e.target.classList.toggle('selected');
       var seatNumber = document.querySelectorAll('.container > .row > .selected');
-
       var totalSeatCost = seatNumber.length * cost;
       document.getElementById('total_seats').innerHTML = `Seats Selected: ${seatNumber.length}`
       document.getElementById('total_cost').innerHTML = `Total Cost: ${totalSeatCost} Rs/-`
+      console.log(seatNumber);
+      // document.getElementById('seatnum').innerHTML = `Seat Number: ${seatNumber.length}`
       if (seatNumber.length > 0){
         document.getElementById('processRequest').disabled = false
       }
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 function openModal(show, rate){
   cost = rate;
   document.getElementById('simpleModal').style.display = 'flex';
-
+// console.log(`/seats/${show}`);
   fetch(`/seats/${show}`)
     .then(response => response.json())
     .then(seats => {
@@ -136,13 +137,39 @@ function openModal(show, rate){
       document.querySelectorAll('.container > .row').forEach(function(a){
         a.remove();
         });
-
+        // all the lines for money
+        let num =1;
+        var ulline = document.createElement("div");
+        ulline.classList.add("verticalLine");
+        ulline.setAttribute('id','ull');
+        var urline = document.createElement("div");
+        urline.setAttribute('id','url');
+        urline.classList.add("urli");
+        var dlline = document.createElement("div");
+        dlline.setAttribute('id','dll');
+        dlline.classList.add("dvl");
+        var drline = document.createElement("div");
+        drline.setAttribute('id','drl');
+        drline.classList.add("drli");
+        
       for ([seatRow, seatsList] of Object.entries(seats)) {
+        // console.log(seatRow);
+        var container = document.querySelector(".container");
+        if(num==1){
+          container.appendChild(ulline);
+          container.appendChild(urline);
+          container.appendChild(dlline);
+          container.appendChild(drline);
+          document.getElementById('ull').innerHTML = `180`;
+          document.getElementById('url').innerHTML = `180`;
+          document.getElementById('dll').innerHTML = `200`;
+          document.getElementById('drl').innerHTML = `200`;
+          num=2;
+        }
         var row = document.createElement("div");
         row.classList.add("row");
         row.classList.add(`${seatRow}`);
 
-        var container = document.querySelector(".container");
         container.appendChild(row);
 
         for ([number, vacancy] of Object.entries(seatsList)) {
@@ -154,8 +181,10 @@ function openModal(show, rate){
           }
 
           row.appendChild(seat);
+
         }
       }
+
     });
       
     document.getElementById('bookTicketDiv').addEventListener('submit', ()=>{
