@@ -110,7 +110,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if ( e.target.classList.contains('seat') && !e.target.classList.contains('occupied') ) {
       e.target.classList.toggle('selected');
       var seatNumber = document.querySelectorAll('.container > .row > .selected');
-      var totalSeatCost = seatNumber.length * cost;
+
+      var cheap_seats = document.querySelectorAll('.container > .row > .selected.cheap');
+      var exp_seats = document.querySelectorAll('.container > .row > .selected.exp');
+      var totalSeatCost = cheap_seats.length*(cost-20) + exp_seats.length*(cost);
+
       document.getElementById('total_seats').innerHTML = `Seats Selected: ${seatNumber.length}`
       document.getElementById('total_cost').innerHTML = `Total Cost: ${totalSeatCost} Rs/-`
       console.log(seatNumber);
@@ -174,14 +178,30 @@ function openModal(show, rate){
 
         for ([number, vacancy] of Object.entries(seatsList)) {
           var seat = document.createElement("div");
-          seat.classList.add("seat");
-          seat.classList.add(`${number}`);
+          
+          if (seatRow == 'B' || (`${number}` == 13 && seatRow != 'Q') || ((seatRow == 'C' && `${number}` != 5) && (seatRow == 'C' && `${number}` != 6) &&
+          (seatRow == 'C' && `${number}` != 7) && (seatRow == 'C' && `${number}` != 8) && (seatRow == 'C' && `${number}` != 9) )){
+            seat.classList.add('notavail');
+          }
+          else if((seatRow == 'B' && `${number}` == 19) || (seatRow == 'D' && `${number}` == 19)||(seatRow == 'F' && `${number}` == 19)
+          || (seatRow == 'H' && `${number}` == 19)|| (seatRow == 'J' && `${number}` == 19) || (seatRow == 'L' && `${number}` == 19)
+          || (seatRow == 'N' && `${number}` == 19)|| (seatRow == 'P' && `${number}` == 19)){
+            seat.classList.add('notavail');
+            seat.classList.add('notthere');
+          }
+          else {
+            seat.classList.add("seat");
+            seat.classList.add(`${number}`);
           if (`${vacancy}` == 'Occupied') {
             seat.classList.add('occupied');
           }
+          }
+          if(seatRow<='F'){
+            seat.classList.add("cheap");
+          }
+          else seat.classList.add("exp");
 
           row.appendChild(seat);
-
         }
       }
 
@@ -202,3 +222,5 @@ function openModal(show, rate){
       })
     });
   }
+  
+

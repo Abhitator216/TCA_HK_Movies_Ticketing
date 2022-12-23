@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="ticketMovieInfo">
                                     <div class="left">
-                                        <ul>
+                                        <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
                                             <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
                                             <li><span class="bold">Seat(s):</span> {% for key, seatList in ticket.seat.items %}
                                                             {% for seat in seatList %}
@@ -93,6 +93,7 @@
                                             </li>
                                             <li><span class="bold">Total Cost:</span> {{ ticket.cost }} Rs/-</li>
                                             <li><span class="bold">Hall:</span> {{ ticket.show.hall.name }}</li>
+                                            
                                             <li><span class="bold">Theatre:</span> {{ ticket.show.hall.theatre.name }}</li>
                                             <li><span class="bold">City:</span> {{ ticket.show.hall.theatre.city.name }}</li>
                                         </ul>

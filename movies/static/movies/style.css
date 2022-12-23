@@ -216,3 +216,41 @@
   color: purple;
   font-weight: bold;
 }
+/* added new css */
+.notavail {
+  background-color: #f83030;
+  height: 12px;
+  width: 15px;
+  margin: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.notavail:after{
+  display: inline-block;
+  content: "\00d7"; /* This will render the 'X' */
+  /* color:black; */
+  font-weight: bold;
+}
+.notavail:nth-of-type(4) {
+  margin-right: 18px;
+}
+.notavail:nth-last-of-type(2) {
+  margin-left: 18px;
+}
+.notthere{ 
+  opacity: 0;
+}
+.cheap{
+  background-color: purple;
+}
+.exp{
+  background-color: rosybrown;
+}
+
+

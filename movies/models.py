@@ -5,6 +5,7 @@ from django.db import models
 from django.db.models.signals import post_save, post_delete
 from datetime import date
 import datetime as dt
+import json
 
 
 class City(models.Model):
@@ -131,14 +132,15 @@ class Ticket(models.Model):
     seat = models.JSONField()
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     cost = models.IntegerField()
-
     def __str__(self):
-        return f"[{self.user}] - {self.seat} - {self.show}"
+        return f"[{self.pk}]      -[{self.user}] - {self.seat} - {self.show}"
+
 
 
 def deleteTicket(sender, instance, **kwargs):
     currentShow = Show.objects.get(pk=instance.show.id)
     currentShow.seats = emptyAllSeats()
+    func()
     currentShow.save()
 
 

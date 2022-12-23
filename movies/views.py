@@ -194,6 +194,8 @@ def ticket(request):
         row = ''
         col = ''
         total_seats = 0
+        c_s = 0
+        e_s = 0
 
         for seat in data.get("seatList"):
             row = seat[0]
@@ -201,8 +203,11 @@ def ticket(request):
             current_show.seats[row][col] = 'Occupied'
             current_show.save()
             total_seats+=1
+            if row<='F':
+                c_s +=1
+            else : e_s+=1
 
-        cost = len(data.get("seatList")) * current_show.rate
+        cost = c_s*(current_show.rate-20) + e_s*(current_show.rate)
 
         Ticket.objects.create(user=request.user, seat={'seatList':data.get("seatList")}, show=current_show, cost=cost)
 
