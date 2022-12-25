@@ -26,15 +26,15 @@
                             </div>
                             <div class="ticketMovieInfo">
                                 <div class="left">
-                                    <ul>
+                                    <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
                                         <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
-                                          {% comment %} <li><span class="bold">Customer:</span> {{ ticket.seat}}</li>   {% endcomment %}
-                                 <li><span class="bold">Seat(s):</span> 
-                                 {% for dict in ticket.seat %}
-                                                        {% for key,val in dict.items %}  
-                                                             {{key}}{{val}}
-                                                        {% endfor %}
-                                                    {% endfor %}
+                                        {% comment %} <li><span class="bold">Customer:</span> {{ ticket.seat }}</li> {% endcomment %}
+                                        <li><span class="bold">Seat(s):</span> 
+                                            {% for dict,val in ticket.seat.items %}
+                                                    {% for x in val %}
+                                                          {{x}},                                    
+                                                    {% endfor %}                                        
+                                            {% endfor %}
                                         </li>
                                         <li><span class="bold">Total Cost:</span> {{ ticket.cost }} Rs/-</li>
                                         <li><span class="bold">Hall:</span> {{ ticket.show.hall.name }}</li>
@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="ticketMovieInfo">
                                     <div class="left">
-                                        <ul>
+                                        <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
                                             <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
                                             <li><span class="bold">Seat(s):</span> {% for key, seatList in ticket.seat.items %}
                                                             {% for seat in seatList %}
@@ -223,7 +223,7 @@
                             </div>
                             <div class="ticketMovieInfo">
                                 <div class="left">
-                                    <ul>
+                                    <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
                                         <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
                                         <li><span class="bold">Seat(s):</span> {% for key, seatList in ticket.seat.items %}
                                                         {% for seat in seatList %}

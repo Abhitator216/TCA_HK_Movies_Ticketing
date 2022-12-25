@@ -60,7 +60,14 @@ def emptyAllSeats():
     seatDict = {}
     number = {}
     # seat_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G','H']
-
+    
+    # ticket = Ticket.objects.get(pk=1)
+    
+    # ticket =Ticket.objects.get(pk=1)
+    # a=json.loads(ticket.seat)
+    # for d,x in a.items:
+    #     print(d,x)
+    # print(ticket.seat)
     for row in seat_rows:
         for seatNumber in range(1, 22):
             number[seatNumber] = 'Vacant'
@@ -133,14 +140,13 @@ class Ticket(models.Model):
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     cost = models.IntegerField()
     def __str__(self):
-        return f"[{self.pk}]      -[{self.user}] - {self.seat} - {self.show}"
+        return f"[{self.pk}]-[{self.user}] - {self.seat} - {self.show}"
 
 
 
 def deleteTicket(sender, instance, **kwargs):
     currentShow = Show.objects.get(pk=instance.show.id)
     currentShow.seats = emptyAllSeats()
-    func()
     currentShow.save()
 
 
