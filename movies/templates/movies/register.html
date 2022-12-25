@@ -28,13 +28,23 @@
         <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}
             <div class="inputBox">
-                <input type="text" name="username" autocomplete="off" required>
-                <label>Username</label>
+                <input type="text" name="firstname" autocomplete="off" required>
+                <label>First Name</label>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" name="lastname" autocomplete="off" required>
+                <label>Last Name</label>
             </div>
 
             <div class="inputBox">
                 <input type="email" name="email" autocomplete="off" required>
                 <label>Email</label>
+            </div>
+
+            <div class="inputBox">
+                <input type="number" name="phone_no" autocomplete="off" required>
+                <label>Phone Number</label>
             </div>
 
             <div class="inputBox">
@@ -49,7 +59,7 @@
 
             <div class="inputBox">
                 <select name="city" id="citySelect">
-                    <option value="" selected disabled>Select a City</option>
+                    <!-- <option value="" selected disabled>Select a City</option> -->
                     {% for city in cities %}
                         <option value="{{city.name}}">{{ city.name }}</option>
                     {% endfor %}

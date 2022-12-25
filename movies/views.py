@@ -20,7 +20,8 @@ def login_view(request):
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+        num = request.POST["phone_no"]
+        user = authenticate(request,password=password,phone_no=num)
 
         # Check if authentication successful
         if user is not None:
@@ -49,8 +50,11 @@ def layout(request):
 
 def register(request):
     if request.method == "POST":
-        username = request.POST["username"]
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
         email = request.POST["email"]
+        phone_number = request.POST["phone_no"]
+
         city = request.POST["city"]
         city_obj = City.objects.get(name=city)
 
@@ -63,7 +67,7 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password, city=city_obj)
+            user = User.objects.create_user(firstname,email, password, city=city_obj,phone_no=phone_number)
             user.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
@@ -124,7 +128,7 @@ def moviePage(request, movieName):
 
 def bookTicket(request, movieName):
 
-    current_city = request.user.city.name
+    current_city = request.user.city
     
     today = datetime.today()
     currentDate = today.strftime('%d %B, %Y')
@@ -132,9 +136,12 @@ def bookTicket(request, movieName):
     current_time = localtime().time()
 
     dayList = []
+    showsk = Show.objects.filter(movie__name=movieName).values_list('date', flat=True)
 
-    for i in range(30):
-        new_date = today + timedelta(days=i+1)
+    for i in showsk:
+        # new_date = today + timedelta(days=i+1)
+        # new_date = show.date
+        new_date = i
         dayList.append(new_date.strftime('%d %B, %Y'))
 
     current_movie = Movie.objects.get(name=movieName)
@@ -145,7 +152,7 @@ def bookTicket(request, movieName):
     context={
         "current_city": current_city,
         "movie": Movie.objects.get(name=movieName),
-        "cities": City.objects.exclude(name=request.user.city.name),
+        "cities": City.objects.exclude(name=request.user.city),
         "today": currentDate,
         "dayList": dayList,
         "shows": shows

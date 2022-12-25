@@ -18,8 +18,8 @@
         <div class="hallInfo">
         <label class="movieSearchLabel" for="cities">Select City:</label>
             <select name="cities" id="cities" class="changeIsGood">
-                    <option value="any">---Any---</option>
-                    <option value="{{ current_city }}" selected>{{ current_city }}</option>
+                    <!-- <option value="any">---Any---</option> -->
+                    <!-- <option value="{{ current_city }}" selected>{{ current_city }}</option> -->
                 {% for city in cities %}
                     <option value="{{city.name}}">{{ city.name }}</option>
                 {% endfor %}
@@ -29,7 +29,7 @@
         <div class="hallInfo">
             <label class="movieSearchLabel" for="daySelect">Select Date:</label>
             <select id="daySelect" class="changeIsGood">
-                    <option value="{{ today }}" selected>{{ today }}</option>
+                    <!-- <option value="{{ today }}" selected>{{ today }}</option> -->
                 {% for day in dayList %}
                     <option value="{{ day }}">{{ day }}</option>
                 {% endfor %}
@@ -39,11 +39,8 @@
         <div class="hallInfo">
         <label class="movieSearchLabel" for="daySelect">Select Hall Type:</label>
             <select id="hallSelect" class="changeIsGood">
-                <option value="any" selected>---Any---</option>
-                <option value="2D">2D</option>
-                <option value="3D">3D</option>
-                <option value="IMAX">IMAX</option>
-                <option value="4DX">4DX</option>
+                <!-- <option value="any" selected>---Any---</option> -->
+                <option value="2D" selected>2D</option>
             </select>
         </div>
 

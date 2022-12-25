@@ -17,6 +17,7 @@ class City(models.Model):
 
 class User(AbstractUser):
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    phone_no = models.CharField(max_length=10, null=True)
     pass
 
 
