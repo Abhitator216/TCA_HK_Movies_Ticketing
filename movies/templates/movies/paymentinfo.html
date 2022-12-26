@@ -1,0 +1,92 @@
+{% extends 'movies/layout.html' %}
+
+{% load static %}
+{% block head %}
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Float four columns side by side */
+  .column {
+    float: left;
+    width: 25%;
+    /* padding: 0 10px; */
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Style the counter cards */
+  
+  .card {
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3.5em;
+    padding: 16px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(260deg, #680bd3 0%, #ff1515 100%);
+    font-size: larger;
+  }
+  </style>
+<link rel="stylesheet" href="{% static 'movies/style.css' %}" />
+{% endblock %}
+{% block body %}
+
+<!-- <div class="paymentclass" style="color:white">
+  
+  <p><strong>2.  :  <strong> </p> <br>
+    
+  </div> -->
+  <div class="paymentclass">
+    <h1>You can pay  in any three methods and <br> send the screenshot along with Ticket-id to the TCA mobile number +852 62632434</h1><br>
+  </div>
+  <div class="row">
+ 
+
+  <div class="column">
+    <div class="card">
+      <h3>FPS</h3>
+      <p>+852 6263 2434</p>
+      <!-- <p>Some text</p> -->
+    </div>
+  </div>
+   <div class="column">
+    <div class="card">
+      <h3> TCA Bank Details</h3>
+      <p>A/C name: Tamil Cultural Association</p>
+      <p> Account no 121-869648-838</p>
+      <p>   Bank: HSBC</p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <h3>Payme</h3>
+      <p><strong> <a href="https://qr.payme.hsbc.com.hk/2/FA5DFFgveYKzeqTdBioRGz"> <button class="pbtn"> Click Me</button> </a><strong></p>
+      <!-- <p>Some text</p> -->
+    </div>
+  </div>
+  
+
+</div>
+{% endblock %}

@@ -82,8 +82,12 @@ def register(request):
 @login_required
 def index(request):
     allMovies = list(Movie.objects.all())
-    random_movies = random.sample(allMovies, 3)
+    random_movies = random.sample(allMovies, 1)
     return render(request, "movies/index.html", {"random_movies": random_movies})
+
+def paymentinfo(request):
+    return render(request, "movies/paymentinfo.html")
+
 
 def search(request):
     if request.method == 'POST':
@@ -137,10 +141,8 @@ def bookTicket(request, movieName):
 
     dayList = []
     showsk = Show.objects.filter(movie__name=movieName).values_list('date', flat=True)
-
+    
     for i in showsk:
-        # new_date = today + timedelta(days=i+1)
-        # new_date = show.date
         new_date = i
         dayList.append(new_date.strftime('%d %B, %Y'))
 

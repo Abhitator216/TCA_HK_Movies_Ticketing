@@ -2,6 +2,8 @@
 
 
 {% block body %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
     <div id="posterBox">
         <div id="posterInnerBox">
@@ -27,9 +29,19 @@
             <p>{{ movie.about }}</p>
 
             <form id="bookTicketPage" action="{% url 'book_seat' movieName=movie %}" method="GET">
-                <button type="submit" form="bookTicketPage" id="selectHall">Book Seats</button>
+                <script>function alert2() {
+                     
+                  
+                     alert("1. No cancellation is allowed once the ticket is booked.\n2. payment must be paid within 24hrs of booking. Failing will result in releasing the ticket to others.\n3. All viewers must use the 'Leave home Safe' app with a Valid vaccine pass.\n4. You cannot enter the cinema hall without a vaccine pass.\n5. Always Wear a mask inside and outside of the cinema hall.\n6. Outside foods are not allowed inside the Cinema Hall.\n7. Proceed with the ticket booking only if you agree with the terms and conditions.");
+                     
+                }
+                  </script>
+                <button type="submit" form="bookTicketPage" id="selectHall" onclick="alert2()" >Book Seats</button>
+               
             </form>
 
         </div>
-        
+        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src= "script.js"></script>
+        <script src= "https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 {% endblock %}

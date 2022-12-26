@@ -10,11 +10,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
   .then(response => response.json())
   .then(shows => {
     var i = 0;
+    // const show.today = new Date();
+    // console.log(show.today)
+    
     shows.forEach(function(show) {
-        if (show.date > show.today) {
-          document.querySelectorAll('.book')[i].href = `javascript:openModal(${show.id}, ${show.rate})`;
-          i++;
-          }
+ 
+      if (show.date > show.today) {
+        document.querySelectorAll('.book')[i].href = `javascript:openModal(${show.id}, ${show.rate})`;
+        i++;
+      }
         else if (show.date == show.today && show.time > show.current_time) {
           document.querySelectorAll('.book')[i].href = `javascript:openModal(${show.id}, ${show.rate})`;
           i++;
@@ -40,8 +44,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
         document.querySelectorAll('.showData').forEach(function(a){
           a.remove()
           });
+          console.log(shows);
         shows.forEach(function(show) {
-
+          // const show.today = new Date();
+            
+            // var show.today=datetime.today()
+            // console.log(show.date)
+            // console.log(show.today)
           if (show.date > show.today) {
 
             var row = table.insertRow();
@@ -52,21 +61,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
             var cell3 = row.insertCell(2);
             var cell4 = row.insertCell(3);
             var cell5 = row.insertCell(4);
-
+            var cell6 = row.insertCell(5);
             var a = document.createElement('a');
-            var link = document.createTextNode(show.time_display);  
+            var link = document.createTextNode('Select Seat/s');  
             a.appendChild(link);  
-            a.title = show.time_display;
+            // a.title = show.time_display;
+            a.title = "Select Seat/s";
             a.className = 'book'
             a.href = `javascript:openModal(${show.id}, ${show.rate})`;
 
             cell1.innerHTML = show.theatre;
             cell2.innerHTML = `${show.rate} Rs/-`;
             cell3.innerHTML = show.hall_type;
-            cell4.appendChild(a)
+            // cell4.appendChild(a)
+            cell4.innerHTML = show.time_display
             cell5.innerHTML = show.date_display;
-          }
+            cell6.appendChild(a)
 
+          }
           else if (show.date == show.today && show.time > show.current_time) {
             var row = table.insertRow();
             row.className = 'showData'
@@ -76,20 +88,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
             var cell3 = row.insertCell(2);
             var cell4 = row.insertCell(3);
             var cell5 = row.insertCell(4);
-
+            var cell6 = row.insertCell(5);
             var a = document.createElement('a');
-            var link = document.createTextNode(show.time_display);  
+            var link = document.createTextNode('Select Seat/s');  
             a.appendChild(link);  
-            a.title = show.time_display;
+            // a.title = show.time_display;
+            a.title = "Select Seat/s";
             a.className = 'book'
             a.href = `javascript:openModal(${show.id}, ${show.rate})`;
 
             cell1.innerHTML = show.theatre;
             cell2.innerHTML = `${show.rate} Rs/-`;
             cell3.innerHTML = show.hall_type;
-            cell4.appendChild(a)
+            // cell4.appendChild(a)
+            cell4.innerHTML = show.time_display
             cell5.innerHTML = show.date_display;
+            cell6.appendChild(a)
           }
+          
         });
       });
     });
@@ -105,8 +121,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
       
     }
   }
+ document.querySelector('.ag').addEventListener('click', () => {
+  var seatNumber = document.querySelectorAll('.container > .row > .selected');
+  var cb = document.querySelector("#agree");
+  console.log(cb.checked)
 
-  document.querySelector('.container').addEventListener('click', e => {
+  if(seatNumber.length > 0){
+    console.log("if")
+   
+    if(cb.checked==true){
+        document.getElementById('processRequest').disabled = false
+    }
+    else {
+      console.log("else")
+      document.getElementById('processRequest').disabled = true
+    }
+  }
+  else {
+    document.getElementById('processRequest').disabled = true
+  }
+     
+ });
+  document.querySelector(".container").addEventListener('click', e => {
     if ( e.target.classList.contains('seat') && !e.target.classList.contains('occupied') ) {
       e.target.classList.toggle('selected');
       var seatNumber = document.querySelectorAll('.container > .row > .selected');
@@ -117,15 +153,37 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
       document.getElementById('total_seats').innerHTML = `Seats Selected: ${seatNumber.length}`
       document.getElementById('total_cost').innerHTML = `Total Cost: ${totalSeatCost} Rs/-`
-      console.log(seatNumber);
+      // console.log(seatNumber);
       // document.getElementById('seatnum').innerHTML = `Seat Number: ${seatNumber.length}`
-      if (seatNumber.length > 0){
-        document.getElementById('processRequest').disabled = false
-      }
+      // console.log()
+      var cb = document.querySelector("#agree");
+      // console.log(cb.checked)
 
-      else{
-        document.getElementById('processRequest').disabled = true
+      if(seatNumber.length > 0){ 
+        // console.log("if")
+       
+        if(cb.checked==true){
+            document.getElementById('processRequest').disabled = false
+        }
+        else {
+          // console.log("else")
+          document.getElementById('processRequest').disabled = true
+        }
       }
+      else{
+        // console.log("else")
+        document.getElementById('processRequest').disabled = true
+      } 
+      
+      // if (seatNumber.length > 0){
+      //     document.getElementById('processRequest').disabled = false
+      // }
+      // else{
+      //   if (cb.checked==true){
+      //     document.getElementById('processRequest').disabled = true
+      //   }
+        
+      // }
     }
   });
 });

@@ -29,7 +29,7 @@
         <div class="hallInfo">
             <label class="movieSearchLabel" for="daySelect">Select Date:</label>
             <select id="daySelect" class="changeIsGood">
-                    <!-- <option value="{{ today }}" selected>{{ today }}</option> -->
+                <option value="any" selected>---Choose---</option>
                 {% for day in dayList %}
                     <option value="{{ day }}">{{ day }}</option>
                 {% endfor %}
@@ -39,7 +39,7 @@
         <div class="hallInfo">
         <label class="movieSearchLabel" for="daySelect">Select Hall Type:</label>
             <select id="hallSelect" class="changeIsGood">
-                <!-- <option value="any" selected>---Any---</option> -->
+                <option value="any" selected>---Any---</option>
                 <option value="2D" selected>2D</option>
             </select>
         </div>
@@ -56,17 +56,19 @@
                 <th>Hall Type</td>
                 <th>Time</td>
                 <th>Date</td>
+                <th>Seats</td>
             </tr>
-
-            {% for show in shows %}
+            
+            <!-- {% for show in shows %}
                 <tr class="showData">
                     <td>{{ show.hall.theatre.name }}</td>
                     <td>{{ show.rate }} Rs/-</td>
                     <td>{{ show.hall.hall_type }}</td>
-                    <td><a href="#" class="book">{{ show.get_time_display }}</a></td>
+                    <td>{{ show.get_time_display }}</a></td>
                     <td>{{ show.date }}</td>
+                    <td><a href="#" class="book">select seats</a></td>
                 </tr>
-            {% endfor %}
+            {% endfor %} -->
         </table>
     </div>
         <!-- Seat is here -->
@@ -273,9 +275,25 @@
                             </div>
                             </div>
                     
+        
+                    
 
                 <form id="bookTicketDiv" action="{% url 'allTickets' %}">
-                    <button form="bookTicketDiv" type="submit" id = "processRequest" disabled> Book Seats </button>
+                    <input type="checkbox" id="agree" name="agree"  class="ag">
+                    <label > I Confirmed</label><br><br>
+                    <!-- <div>
+                        <h1>You can make the payment in any of the three methods.</h1>
+                        <p><strong>1.   TCA Bank Details:
+                            A/C name: Tamil Cultural Association
+                            Account no 121-869648-838
+                            Bank: HSBC
+                            <strong>
+                      </p>
+                      <p><strong>2.   FPS: +852 6263 2434 <strong> </p>
+                      <p><strong>3.   Payme: <a href="  https://qr.payme.hsbc.com.hk/2/FA5DFFgveYKzeqTdBioRGz" >Click Me</a><strong></p>
+                    </div> -->
+                    
+                    <button form="bookTicketDiv" type="submit" id = "processRequest"  disabled> Book Seats </button>
                 </form>
 
             </div>
@@ -283,8 +301,9 @@
             <div class="seatPrice">
                 <li id="total_seats">Seats Selected: 0</li>
                 <li id="total_cost">Total Cost: 0</li>
-                <li id="seatnum">Seat Number</li>
+                <!-- <li id="seatnum">Seat Number</li> -->
             </div>
+        
         </div>
     </div>
 
