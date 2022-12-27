@@ -36,7 +36,7 @@
                                                     {% endfor %}                                        
                                             {% endfor %}
                                         </li>
-                                        <li><span class="bold">Total Cost:</span> {{ ticket.cost }} Rs/-</li>
+                                        <li><span class="bold">Total Cost:</span> {{ ticket.cost }} HK$/-</li>
                                         <li><span class="bold">Hall:</span> {{ ticket.show.hall.name }}</li>
                                         <li><span class="bold">Theatre:</span> {{ ticket.show.hall.theatre.name }}</li>
                                         <li><span class="bold">City:</span> {{ ticket.show.hall.theatre.city.name }}</li>
@@ -91,7 +91,7 @@
                                                             {% endfor %}
                                                         {% endfor %}
                                             </li>
-                                            <li><span class="bold">Total Cost:</span> {{ ticket.cost }} Rs/-</li>
+                                            <li><span class="bold">Total Cost:</span> {{ ticket.cost }} HK$/-</li>
                                             <li><span class="bold">Hall:</span> {{ ticket.show.hall.name }}</li>
                                             
                                             <li><span class="bold">Theatre:</span> {{ ticket.show.hall.theatre.name }}</li>
@@ -179,7 +179,7 @@
                                                             {% endfor %}
                                                         {% endfor %}
                                             </li>
-                                            <li><span class="bold">Total Cost:</span> {{ ticket.cost }} Rs/-</li>
+                                            <li><span class="bold">Total Cost:</span> {{ ticket.cost }} HK$/-</li>
                                             <li><span class="bold">Hall:</span> {{ ticket.show.hall.name }}</li>
                                             <li><span class="bold">Theatre:</span> {{ ticket.show.hall.theatre.name }}</li>
                                             <li><span class="bold">City:</span> {{ ticket.show.hall.theatre.city.name }}</li>
@@ -235,7 +235,7 @@
                                                         {% endfor %}
                                                     {% endfor %}
                                         </li>
-                                        <li><span class="bold">Total Cost:</span> {{ ticket.cost }} Rs/-</li>
+                                        <li><span class="bold">Total Cost:</span> {{ ticket.cost }} HK$/-</li>
                                         <li><span class="bold">Hall:</span> {{ ticket.show.hall.name }}</li>
                                         <li><span class="bold">Theatre:</span> {{ ticket.show.hall.theatre.name }}</li>
                                         <li><span class="bold">City:</span> {{ ticket.show.hall.theatre.city.name }}</li>
@@ -281,5 +281,10 @@
     </div>
 
     {% endif %}
-
+<script>window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#';
+        window.location.reload();
+    }
+}</script>
 {% endblock %}

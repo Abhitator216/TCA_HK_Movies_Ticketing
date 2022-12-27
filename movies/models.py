@@ -69,6 +69,7 @@ def emptyAllSeats():
     # for d,x in a.items:
     #     print(d,x)
     # print(ticket.seat)
+
     for row in seat_rows:
         for seatNumber in range(1, 22):
             number[seatNumber] = 'Vacant'
@@ -106,7 +107,7 @@ class Show(models.Model):
         }
 
     def __str__(self):
-        return f"[{self.movie}] - [ {self.date.strftime('%d %B, %Y')} ]"
+        return f"[{self.movie}] - [ {self.date.strftime('%d %B, %Y')} ] - [ {self.time}] "
 
         # return f"[{self.movie}] - [ {self.get_time_display(date)} | {self.date.strftime('%d %B, %Y')} ]"
 
@@ -124,8 +125,9 @@ class Show(models.Model):
 
 
 def createTheater(sender, instance, **kwargs):
-    hall_types = [{'2D': 'Hall 1'}, {'3D': 'Hall 2'},
-                  {'4DX': 'Hall 3'}, {'IMAX': 'Hall 4'}]
+    hall_types = [{'2D': 'Hall 1'}]
+    # hall_types = [{'2D': 'Hall 1'}, {'3D': 'Hall 2'},
+    #               {'4DX': 'Hall 3'}, {'IMAX': 'Hall 4'}]
 
     for entry in hall_types:
         for (key, value) in entry.items():
@@ -135,13 +137,25 @@ def createTheater(sender, instance, **kwargs):
 post_save.connect(createTheater, sender=Theatre)
 
 
+
+class Ticketlog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    seat = models.JSONField()
+    show = models.ForeignKey(Show, on_delete=models.DO_NOTHING)
+    cost = models.IntegerField()
+    
+    def __str__(self):
+            return f"[{self.user}] - {self.seat} - {self.show} - {self.show.hall}"
+
+
 class Ticket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     seat = models.JSONField()
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     cost = models.IntegerField()
+    
     def __str__(self):
-        return f"[{self.pk}]-[{self.user}] - {self.seat} - {self.show}"
+        return f"[{self.pk}]-[{self.user}] - {self.seat} - {self.show} - {self.show.hall}"
 
 
 
@@ -149,6 +163,6 @@ def deleteTicket(sender, instance, **kwargs):
     currentShow = Show.objects.get(pk=instance.show.id)
     currentShow.seats = emptyAllSeats()
     currentShow.save()
-
+    
 
 post_delete.connect(deleteTicket, sender=Ticket)

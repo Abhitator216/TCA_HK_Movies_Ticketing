@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             a.href = `javascript:openModal(${show.id}, ${show.rate})`;
 
             cell1.innerHTML = show.theatre;
-            cell2.innerHTML = `${show.rate} Rs/-`;
+            cell2.innerHTML = `${show.rate} HK\$/-`;
             cell3.innerHTML = show.hall_type;
             // cell4.appendChild(a)
             cell4.innerHTML = show.time_display
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             a.href = `javascript:openModal(${show.id}, ${show.rate})`;
 
             cell1.innerHTML = show.theatre;
-            cell2.innerHTML = `${show.rate} Rs/-`;
+            cell2.innerHTML = `${show.rate} HK\$/-`;
             cell3.innerHTML = show.hall_type;
             // cell4.appendChild(a)
             cell4.innerHTML = show.time_display
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       var totalSeatCost = cheap_seats.length*(cost-20) + exp_seats.length*(cost);
 
       document.getElementById('total_seats').innerHTML = `Seats Selected: ${seatNumber.length}`
-      document.getElementById('total_cost').innerHTML = `Total Cost: ${totalSeatCost} Rs/-`
+      document.getElementById('total_cost').innerHTML = `Total Cost: ${totalSeatCost} HK\$/-`
       // console.log(seatNumber);
       // document.getElementById('seatnum').innerHTML = `Seat Number: ${seatNumber.length}`
       // console.log()

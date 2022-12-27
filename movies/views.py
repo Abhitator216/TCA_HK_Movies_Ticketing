@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
-from .models import User, City, Theatre, Hall, Movie, Show, Ticket
+from .models import User, City, Theatre, Hall, Movie, Show, Ticket,Ticketlog
 from datetime import datetime, timedelta
 from django.utils.timezone import now, localtime
 import random
@@ -224,6 +224,7 @@ def ticket(request):
         cost = c_s*(current_show.rate-20) + e_s*(current_show.rate)
 
         Ticket.objects.create(user=request.user, seat={'seatList':data.get("seatList")}, show=current_show, cost=cost)
+        Ticketlog.objects.create(user=request.user, seat={'seatList':data.get("seatList")}, show=current_show, cost=cost)
 
         return JsonResponse({"message": "Ticket Created Successfully"}, status=201)
 
