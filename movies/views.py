@@ -64,15 +64,20 @@ def register(request):
         if password != confirmation:
             messages.error(request, "Passwords must match.")
             return redirect(reverse(register))
-
-        # Attempt to create new user
-        try:
-            user = User.objects.create_user(firstname,email, password, city=city_obj,phone_no=phone_number)
-            user.save()
-        except IntegrityError:
-            return render(request, "auctions/register.html", {
-                "message": "Username already taken."
-            })
+        else :
+            if User.objects.filter(phone_no=phone_number).exists():
+                messages.error(request, "Phone number already exists.")
+                return redirect(reverse(register))
+            elif User.objects.filter(email=email).exists():
+                messages.error(request, "Email already exists.")
+                return redirect(reverse(register))
+            elif User.objects.filter(username=firstname).exists():
+                messages.error(request, "Username already exists.")
+                return redirect(reverse(register)) 
+            else :
+                user = User.objects.create_user(firstname,email,password,city=city_obj,phone_no=phone_number)
+                user.first_name = firstname
+                user.last_name = lastname
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
 
