@@ -20,8 +20,8 @@ def login_view(request):
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
-        num = request.POST["phone_no"]
-        user = authenticate(request,password=password,phone_no=num)
+        # num = request.POST["phone_no"]
+        user = authenticate(request,username=username,password=password)
 
         # Check if authentication successful
         if user is not None:
