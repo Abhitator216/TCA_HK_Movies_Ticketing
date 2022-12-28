@@ -27,6 +27,9 @@ SECRET_KEY = 'RANDOM_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # During development only
+
 
 ALLOWED_HOSTS = ['watchmoviesnow.herokuapp.com','127.0.0.1','localhost']
 
