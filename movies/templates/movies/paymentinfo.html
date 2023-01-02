@@ -48,6 +48,18 @@
     background-image: linear-gradient(260deg, #680bd3 0%, #ff1515 100%);
     font-size: larger;
   }
+  #books{
+    /* padding-top: 2rem;
+     */
+     padding-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #bookbtn{
+    cursor: pointer;
+    border: 4px dashed aqua ;
+  }
   </style>
 <link rel="stylesheet" href="{% static 'movies/style.css' %}" />
 {% endblock %}
@@ -87,6 +99,8 @@
     </div>
   </div>
   
-
 </div>
+<div id="books">
+  <a href="{% url 'allTickets' %}">
+<button id="bookbtn" class="card">Click Here to see the ticket</button></a> </div>
 {% endblock %}
