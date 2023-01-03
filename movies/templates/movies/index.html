@@ -4,7 +4,9 @@
 {% block body %}
     <section>
         <div class="welcomeText">
-             <h1>Welcome to HK Movies</h1>
+            <h1>Welcome {{ request.user.first_name }} to TCA Movies
+                Please click Movies tab to Book Tickets
+             </h1>
          <!--   <li>Search for Movies</li>
             <li>Select Seats</li>
             <li>Generate Ticket</li>

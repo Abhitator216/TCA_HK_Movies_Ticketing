@@ -12,7 +12,33 @@ from datetime import datetime, timedelta
 from django.utils.timezone import now, localtime
 import random
 import json
+import csv
 # Create your views here.
+def export_to_csv(request):
+    ticket=Ticket.objects.all()
+    response=HttpResponse('text/csv')
+    response['Content-Disposition']='attachment;filename=ticketslog.csv'
+    writer=csv.writer(response)
+    writer.writerow(['Ticket_No','User','Seat/s','Show','Theater','Cost'])
+    ticket_fields=ticket.values_list('id','user_id','seat','show','show_id','cost')
+    for tick in ticket_fields:
+        
+        writer.writerow(tick)
+    # return response
+    tickets = Ticket.objects.filter(user=request.user)
+    print(ticket)
+
+
+    # for game in games:
+    #     scores = game.score_set.all().values_list('score',
+    #                                             'date_played')
+    #     writer.writerow(game)
+
+    #     for score in scores:    
+    #         writer.writerow(score)
+
+    return response
+
 
 def login_view(request):
     if request.method == "POST":
@@ -71,13 +97,14 @@ def register(request):
             elif User.objects.filter(email=email).exists():
                 messages.error(request, "Email already exists.")
                 return redirect(reverse(register))
-            elif User.objects.filter(username=firstname).exists():
-                messages.error(request, "Username already exists.")
-                return redirect(reverse(register)) 
+            # elif User.objects.filter(username=firstname).exists():
+            #     messages.error(request, "Username already exists.")
+            #     return redirect(reverse(register)) 
             else :
-                user = User.objects.create_user(firstname,email,password,city=city_obj,phone_no=phone_number)
+                user = User.objects.create_user(email,email,password,city=city_obj,phone_no=phone_number)
                 user.first_name = firstname
                 user.last_name = lastname
+                user.save()
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
 

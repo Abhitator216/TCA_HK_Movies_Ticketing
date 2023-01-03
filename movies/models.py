@@ -145,7 +145,7 @@ class Ticketlog(models.Model):
     cost = models.IntegerField()
     
     def __str__(self):
-            return f"[{self.user}] - {self.seat} - {self.show} - {self.show.hall}"
+            return f"[{self.pk}] - {self.seat} - {self.show} - {self.show.hall}"
 
 
 class Ticket(models.Model):

@@ -293,13 +293,7 @@ function openModal(show, rate) {
           `${a.parentElement.classList.item(1)}${a.classList.item(1)}`
         );
       });
-
-    fetch(`/ticket`, {
-      method: "POST",
-      body: JSON.stringify({
-        show: show,
-        seatList: seatList,
-      }),
-    });
+      // console.log("ticket");
+        fetch(`/ticket`, {method: "POST",body: JSON.stringify({show: show,seatList: seatList,}),});
   });
 }

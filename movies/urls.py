@@ -18,4 +18,5 @@ urlpatterns = [
     path('tickets', views.allTickets, name="allTickets"),
     path('movies', views.allMovies, name="allMovies"),
     path('paymentinfo/', views.paymentinfo, name="paymentinfo"),
+    path('export-to-csv/', views.export_to_csv, name="export-to-csv"),
 ]

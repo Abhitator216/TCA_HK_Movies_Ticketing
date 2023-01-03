@@ -27,8 +27,8 @@
                             <div class="ticketMovieInfo">
                                 <div class="left">
                                     <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
-                                        <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
-                                        {% comment %} <li><span class="bold">Customer:</span> {{ ticket.seat }}</li> {% endcomment %}
+                                        <li><span class="bold">Name:</span> {{ ticket.user.username }}</li>
+                                        {% comment %} <li><span class="bold">Name:</span> {{ ticket.seat }}</li> {% endcomment %}
                                         <li><span class="bold">Seat(s):</span> 
                                             {% for dict,val in ticket.seat.items %}
                                                     {% for x in val %}
@@ -80,7 +80,7 @@
                                 <div class="ticketMovieInfo">
                                     <div class="left">
                                         <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
-                                            <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
+                                            <li><span class="bold">Name:</span> {{ ticket.user.username }}</li>
                                             <li><span class="bold">Seat(s):</span> {% for key, seatList in ticket.seat.items %}
                                                             {% for seat in seatList %}
                                                                 {% if forloop.last %}
@@ -168,7 +168,7 @@
                                 <div class="ticketMovieInfo">
                                     <div class="left">
                                         <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
-                                            <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
+                                            <li><span class="bold">Name:</span> {{ ticket.user.username }}</li>
                                             <li><span class="bold">Seat(s):</span> {% for key, seatList in ticket.seat.items %}
                                                             {% for seat in seatList %}
                                                                 {% if forloop.last %}
@@ -224,7 +224,7 @@
                             <div class="ticketMovieInfo">
                                 <div class="left">
                                     <ul><li><span class="bold">Ticket ID:</span> {{ ticket.id }}</li>
-                                        <li><span class="bold">Customer:</span> {{ ticket.user.username }}</li>
+                                        <li><span class="bold">Name:</span> {{ ticket.user.username }}</li>
                                         <li><span class="bold">Seat(s):</span> {% for key, seatList in ticket.seat.items %}
                                                         {% for seat in seatList %}
                                                             {% if forloop.last %}
