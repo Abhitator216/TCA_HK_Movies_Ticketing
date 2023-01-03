@@ -139,13 +139,16 @@ post_save.connect(createTheater, sender=Theatre)
 
 
 class Ticketlog(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    username = models.CharField(max_length=100,null=True)
     seat = models.JSONField()
-    show = models.ForeignKey(Show, on_delete=models.DO_NOTHING)
+    show_name = models.CharField(max_length=200,null=True)
+    show_date = models.DateField(null=True)
+    show_time = models.TimeField(null=True)
+    hall_name = models.CharField(max_length=30,null=True)
     cost = models.IntegerField()
-    
+    # teater_name = models.CharField(max_length=30,null=True)
     def __str__(self):
-            return f"[{self.pk}] - {self.seat} - {self.show} - {self.show.hall}"
+            return f"[{self.pk}] - {self.username} - {self.show_name} - {self.hall_name} - {self.cost} - {self.show_date} "
 
 
 class Ticket(models.Model):

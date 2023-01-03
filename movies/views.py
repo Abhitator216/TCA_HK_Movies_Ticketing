@@ -260,7 +260,15 @@ def ticket(request):
                 else : e_s+=1
             cost = c_s*(current_show.rate-20) + e_s*(current_show.rate)
             Ticket.objects.create(user=request.user, seat={'seatList':data.get("seatList")}, show=current_show, cost=cost)
-            Ticketlog.objects.create(user=request.user, seat={'seatList':data.get("seatList")}, show=current_show, cost=cost)
+            Ticketlog.objects.create(
+            username=request.user, 
+            seat={'seatList':data.get("seatList")}, 
+            show_name=current_show.movie.name,
+            show_date=current_show.date,
+            show_time=current_show.time,
+            hall_name=current_show.hall.theatre.name,
+            cost=cost)
+            # teatre_name=current_show.hall.theatre.name,
             return JsonResponse({"message": "Ticket Created Successfully"}, status=201)
         return JsonResponse({"message": "Ticket Created Successfully"}, status=500)
         

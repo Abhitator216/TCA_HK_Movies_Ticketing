@@ -718,13 +718,14 @@ section .wave:after {
 }
 
 #selectHall {
-    background: coral;
+    background: rgb(0 140 2);
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     padding: 1em 2em;
     color: #fff;
     border: 0;
     margin-top: 20px;
+    width: 8em;
 }
 
 #selectHall:hover {
