@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelectorAll(".showData").forEach(function (a) {
             a.remove();
           });
-          console.log(shows);
+          // console.log(shows);
           shows.forEach(function (show) {
             // const show.today = new Date();
 
@@ -120,10 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".ag").addEventListener("click", () => {
     var seatNumber = document.querySelectorAll(".container > .row > .selected");
     var cb = document.querySelector("#agree");
-    console.log(cb.checked);
+    // console.log(cb.checked);
 
     if (seatNumber.length > 0) {
-      console.log("if");
+      // console.log("if");
 
       if (cb.checked == true) {
         document.getElementById("processRequest").disabled = false;
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.target.classList.contains("seat") &&
       !e.target.classList.contains("occupied")
     ) {
-      e.target.classList.toggle("selected");
+      e.target.classList.toggle("selected");//change the color to selected
       var seatNumber = document.querySelectorAll(
         ".container > .row > .selected"
       );
@@ -151,17 +151,33 @@ document.addEventListener("DOMContentLoaded", () => {
       var exp_seats = document.querySelectorAll(
         ".container > .row > .selected.exp"
       );
+      var selcted_row = document.querySelectorAll(
+        ".container > .row > .selected"
+      );
+      // console.log(selcted_row);
+
+
       var totalSeatCost =
         cheap_seats.length * (cost - 20) + exp_seats.length * cost;
+        
+        
+        var mylist,mylist2;
+        let s=""
+        for ([seatRow, seatsList] of Object.entries(seatNumber)) {
+            mylist=seatsList.classList[1];
+            mylist2=seatsList.classList[3];
+            s+=""+mylist2+mylist+", ";
+          }
+          // console.log(s);
+        document.getElementById(
+          "total_seats"
+        ).innerHTML = `Seats Selected: ${s}`;
 
-      document.getElementById(
-        "total_seats"
-      ).innerHTML = `Seats Selected: ${seatNumber.length}`;
       document.getElementById(
         "total_cost"
       ).innerHTML = `Total Cost: ${totalSeatCost} HK\$/-`;
       // console.log(seatNumber);
-      // document.getElementById('seatnum').innerHTML = `Seat Number: ${seatNumber.length}`
+      document.getElementById('seatnum').innerHTML = `Seat Number: ${seatNumber.length}`
       // console.log()
       var cb = document.querySelector("#agree");
       // console.log(cb.checked)
@@ -205,38 +221,47 @@ function openModal(show, rate) {
       });
       // all the lines for money
       let num = 1;
-      var ulline = document.createElement("div");
-      ulline.classList.add("verticalLine");
-      ulline.setAttribute("id", "ull");
-      var urline = document.createElement("div");
-      urline.setAttribute("id", "url");
-      urline.classList.add("urli");
-      var dlline = document.createElement("div");
-      dlline.setAttribute("id", "dll");
-      dlline.classList.add("dvl");
-      var drline = document.createElement("div");
-      drline.setAttribute("id", "drl");
-      drline.classList.add("drli");
+      // var ulline = document.createElement("div");
+      // ulline.classList.add("verticalLine");
+      // ulline.setAttribute("id", "ull");
+      // var urline = document.createElement("div");
+      // urline.setAttribute("id", "url");
+      // urline.classList.add("urli");
+      // var dlline = document.createElement("div");
+      // dlline.setAttribute("id", "dll");
+      // dlline.classList.add("dvl");
+      // var drline = document.createElement("div");
+      // drline.setAttribute("id", "drl");
+      // drline.classList.add("drli");
 
+      
       for ([seatRow, seatsList] of Object.entries(seats)) {
+        // console.log("Hi i am here")
         // console.log(seatRow);
         var container = document.querySelector(".container");
-        if (num == 1) {
-          container.appendChild(ulline);
-          container.appendChild(urline);
-          container.appendChild(dlline);
-          container.appendChild(drline);
-          document.getElementById("ull").innerHTML = `180`;
-          document.getElementById("url").innerHTML = `180`;
-          document.getElementById("dll").innerHTML = `200`;
-          document.getElementById("drl").innerHTML = `200`;
-          num = 2;
-        }
+        // if (num == 1) {
+        //   container.appendChild(ulline);
+        //   container.appendChild(urline);
+        //   container.appendChild(dlline);
+        //   container.appendChild(drline);
+        //   document.getElementById("ull").innerHTML = `180`;
+        //   document.getElementById("url").innerHTML = `180`;
+        //   document.getElementById("dll").innerHTML = `200`;
+        //   document.getElementById("drl").innerHTML = `200`;
+        //   num = 2;
+        // }conso
         var row = document.createElement("div");
         row.classList.add("row");
         row.classList.add(`${seatRow}`);
 
+        var r_n = document.createElement("div");
+        r_n.classList.add("row_number");
+
+        
         container.appendChild(row);
+        row.appendChild(r_n);
+        r_n.innerHTML = `${seatRow}`;
+        
 
         for ([number, vacancy] of Object.entries(seatsList)) {
           var seat = document.createElement("div");
@@ -278,9 +303,21 @@ function openModal(show, rate) {
           if (seatRow <= "F") {
             seat.classList.add("cheap");
           } else seat.classList.add("exp");
-
+          
+          seat.classList.add(seatRow);
           row.appendChild(seat);
         }
+        var r1_n = document.createElement("div");
+        r1_n.classList.add("row_right_number");
+
+        
+        
+        row.appendChild(r1_n);
+        r1_n.innerHTML = `${seatRow}`;
+
+
+
+
       }
     });
 

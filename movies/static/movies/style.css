@@ -117,7 +117,7 @@
   margin-right: 18px;
 }
 
-.seat:nth-last-of-type(2) {
+.seat:nth-last-of-type(3) {
   margin-left: 18px;
 }
 
@@ -241,7 +241,7 @@
 .notavail:nth-of-type(4) {
   margin-right: 18px;
 }
-.notavail:nth-last-of-type(2) {
+.notavail:nth-last-of-type(3) {
   margin-left: 18px;
 }
 .notthere{ 
@@ -321,4 +321,11 @@
   cursor: pointer;
 }
   
-
+.row_number{
+  width: 1em;
+  padding-right: 1em;
+}
+.row_right_number{
+  /* width: 1em; */
+  padding-left: 1em;
+}
