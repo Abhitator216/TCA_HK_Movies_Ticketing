@@ -1,60 +1,67 @@
-
-{% extends 'movies/layout.html' %}
-
-
-{% block body %}
+{% extends 'movies/layout.html' %} {% block body %}
 <style>
-  
+  .modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.6rem;
+    width: 24rem;
+    padding: 1.3rem;
+    position: absolute;
+    z-index: 2;
+    top: 15%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 3em;
+  }
+  @media screen and (max-width: 500px) {
     .modal {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.4rem;
-      width: 450px;
-      padding: 1.3rem;
-      min-height: 250px;
-      position: absolute;
-      z-index: 2;
-      top: 20%;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 15px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 18rem;
+    padding: 1.3rem;
+    position: absolute;
+    z-index: 2;
+    top: 20%;
+    background-color: white;
+    border: 1px solid #ddd;
+    right: 1em;
+    border-radius: 3em;
     }
-    
-    .modal .flex {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    
-  
-    
-    .modal p {
-      font-size: 1 rem;
-      color: white;
-      margin: 0.4rem 0 0.2rem;
-    }
-    
-    button {
-      cursor: pointer;
-      border: none;
-      font-weight: 600;
-    }
-    
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 1.4rem;
-      font-weight: 700;
-      background-color: black;
-      color: white;
-      border-radius: 5px;
-      text-align: center;
-      font-size: 1em;
-    }
-   
-    
-    .btn-close {
-        background: #c50d00;
+  }
+  .modal .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal p {
+    font-size: 1 rem;
+    color: white;
+    margin: 0.4rem 0 0.2rem;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.4rem;
+    font-weight: 700;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  .btn-close {
+    background: #c50d00;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     padding: 1em 2em;
@@ -65,61 +72,63 @@
     cursor: pointer;
     font-weight: bolder;
     width: 5em;
-    }
-    .btn-close:hover {
+    border-radius: 2em;
+  }
+  .btn-close:hover {
     background: #333;
-    }
-    .agdis{
-      display: flex;
+  }
+  .agdis {
+    display: flex;
     justify-content: space-evenly;
-   
-    }
-    .overlay { 
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(3px);
-      z-index: 1;
-    }
-    
-    .hidden {
-      display:none;
-    }
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+  }
 
-    </style>
+  .hidden {
+    display: none;
+  }
+</style>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+<link
+  rel="stylesheet"
+  href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+/>
+<link rel="stylesheet" href="/resources/demos/style.css" />
 
-    <div id="posterBox">
-        <div id="posterInnerBox">
-            <div class="topInfoLeft">
-                <div class="movieBanner"></div>
-            </div>
-
-            <div class="topInfoRight">
-                <h1> {{ movie.name }}</h1>
-            </div>
-        </div>
+<div id="posterBox">
+  <div id="posterInnerBox">
+    <div class="topInfoLeft">
+      <div class="movieBanner"></div>
     </div>
 
-    <div id="movieContainer">
-        <div class="movieInfoLeft">
-            <div class="movieBanner">
-                <img src="{{ movie.poster }}">
-            </div>
-        </div>
+    <div class="topInfoRight">
+      <h1>{{ movie.name }}</h1>
+    </div>
+  </div>
+</div>
 
-        <div class="movieInfoRight">
-            <h2>Description</h2>
-            <p>{{ movie.about }}</p>
+<div id="movieContainer">
+  <div class="movieInfoLeft">
+    <div class="movieBanner">
+      <img src="{{ movie.poster }}" />
+    </div>
+  </div>
 
-            <!-- <form id="bookTicketPage" action="{% url 'book_seat' movieName=movie %}" method="GET">
+  <div class="movieInfoRight">
+    <h2>Description</h2>
+    <p>{{ movie.about }}</p>
+
+    <!-- <form id="bookTicketPage" action="{% url 'book_seat' movieName=movie %}" method="GET">
                 <script>function alert2() {
                      
                   
@@ -128,65 +137,84 @@
                 }
                   </script>
                 <button type="submit" form="bookTicketPage" id="selectHall" onclick="alert2()" >Book Seats</button> -->
-               
-            <!-- </form> -->
-            <section id="hello" class="modal hidden">
-                <div >
-                  <h3 style="color: white;">Terms And conditions </h3>
-                  <p>1. No cancellation is allowed once the ticket is booked.</p>
-                  <p>2. payment must be paid within 24hrs of booking. Failing will result in releasing the ticket to others.</p>
-                  <p>3. All viewers must use the 'Leave home Safe' app with a Valid vaccine pass.</p>
-                  <p>4. You cannot enter the cinema hall without a vaccine pass.</p>
-                  <p>5. Always Wear a mask inside and outside of the cinema hall.</p>
-                  <p>6. Outside foods are not allowed inside the Cinema Hall.</p>
-                  <p>7. Proceed with the ticket booking only if you agree with the terms and conditions.</p>                  
-                </div>
-                
-                
-                <form style='display:inline;' id="bookTicketPage" action="{% url 'book_seat' movieName=movie %}" method="GET">
-                    <div class ="agdis">
-                      <span class="btn-close">Dis Agree </span>
-                      <button type="submit" form="bookTicketPage" id="selectHall" onclick="alert2()">Agree</button>
-                    </div>
 
-              </form>
-              </section>
+    <!-- </form> -->
+    <section id="hello" class="modal hidden" style="height: 64vh">
+      <div>
+        <h3 style="color: white">Terms And conditions</h3>
+        <p>1. No cancellation is allowed once the ticket is booked.</p>
+        <p>
+          2. payment must be paid within 24hrs of booking. Failing will result
+          in releasing the ticket to others.
+        </p>
+        <p>
+          3. All viewers must use the 'Leave home Safe' app with a Valid vaccine
+          pass.
+        </p>
+        <p>4. You cannot enter the cinema hall without a vaccine pass.</p>
+        <p>5. Always Wear a mask inside and outside of the cinema hall.</p>
+        <p>6. Outside foods are not allowed inside the Cinema Hall.</p>
+        <p>
+          7. Proceed with the ticket booking only if you agree with the terms
+          and conditions.
+        </p>
+      </div>
 
-              <div class="overlay hidden"></div>
-              <button class="btn btn-open">Book Seats</button>
-
+      <form
+        style="display: inline"
+        id="bookTicketPage"
+        action="{% url 'book_seat' movieName=movie %}"
+        method="GET"
+      >
+        <div class="agdis">
+          <span class="btn-close">Dis Agree </span>
+          <button
+            type="submit"
+            form="bookTicketPage"
+            id="selectHall"
+            onclick="alert2()"
+          >
+            Agree
+          </button>
         </div>
-        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src= "script.js"></script>
-        <script src= "https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-        <script>
-            const modal = document.getElementById("hello");
-            const overlay = document.querySelector(".overlay");
-            const openModalBtn = document.querySelector(".btn-open");
-            const closeModalBtn = document.querySelector(".btn-close");
-            
-            // close modal function
-            const closeModal = function () {
-              modal.classList.add("hidden");
-              overlay.classList.add("hidden");
-            };
-            // close the modal when the close button and overlay is clicked
-            closeModalBtn.addEventListener("click", closeModal);
-            overlay.addEventListener("click", closeModal);
-            
-            // close modal when the Esc key is pressed
-            document.addEventListener("keydown", function (e) {
-              if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-                closeModal();
-              }
-            });
-            
-            // open modal function
-            const openModal = function () {
-              modal.classList.remove("hidden");
-              overlay.classList.remove("hidden");
-            };
-            // open modal event
-            openModalBtn.addEventListener("click", openModal);
-            </script>
-{% endblock %}
+      </form>
+    </section>
+
+    <div class="overlay hidden"></div>
+    <button class="btn btn-open">Book Seats</button>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+  <script>
+    const modal = document.getElementById("hello");
+    const overlay = document.querySelector(".overlay");
+    const openModalBtn = document.querySelector(".btn-open");
+    const closeModalBtn = document.querySelector(".btn-close");
+
+    // close modal function
+    const closeModal = function () {
+      modal.classList.add("hidden");
+      overlay.classList.add("hidden");
+    };
+    // close the modal when the close button and overlay is clicked
+    closeModalBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", closeModal);
+
+    // close modal when the Esc key is pressed
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+
+    // open modal function
+    const openModal = function () {
+      modal.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+    };
+    // open modal event
+    openModalBtn.addEventListener("click", openModal);
+  </script>
+  {% endblock %}
+</div>
