@@ -81,14 +81,14 @@ def emptyAllSeats():
 
 class Show(models.Model):
 
-    HOUR_CHOICES = [(dt.time(hour=x), f'{y}') for x, y in [
-        (9, '9:00 AM'), (12, '12:00 PM'), (15, '3:00 PM'), (18, '6:00 PM'), (21, '9:00 PM')]]
+    # HOUR_CHOICES = [(dt.time(hour=x), f'{y}') for x, y in [
+    #     (9, '9:00 AM'), (12, '12:00 PM'), (15, '3:00 PM'), (18, '6:00 PM'), (21, '9:00 PM')]]
 
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
     seats = models.JSONField(default=emptyAllSeats())
     date = models.DateField()
-    time = models.TimeField(choices=HOUR_CHOICES)
+    time = models.TimeField()
     rate = models.IntegerField()
 
     def serialize(self):
@@ -158,7 +158,7 @@ class Ticket(models.Model):
     cost = models.IntegerField()
     
     def __str__(self):
-        return f"[{self.pk}]-[{self.user}] - {self.seat} - {self.show} - {self.show.hall}"
+        return f"[{self.pk}]-[{self.user.first_name}] - {self.seat} - {self.show} - {self.show.hall}"
 
 
 

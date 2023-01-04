@@ -261,7 +261,7 @@ def ticket(request):
             cost = c_s*(current_show.rate-20) + e_s*(current_show.rate)
             Ticket.objects.create(user=request.user, seat={'seatList':data.get("seatList")}, show=current_show, cost=cost)
             Ticketlog.objects.create(
-            username=request.user, 
+            username=request.user.first_name, 
             seat={'seatList':data.get("seatList")}, 
             show_name=current_show.movie.name,
             show_date=current_show.date,
