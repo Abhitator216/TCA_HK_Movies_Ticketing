@@ -290,3 +290,4 @@ def allTickets(request):
 
 def allMovies(request):
     return render(request, "movies/allMovies.html")
+

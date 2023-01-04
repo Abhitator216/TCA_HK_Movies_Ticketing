@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (cb.checked == true) {
         document.getElementById("processRequest").disabled = false;
       } else {
-        console.log("else");
+        // console.log("else");
         document.getElementById("processRequest").disabled = true;
       }
     } else {
@@ -331,6 +331,14 @@ function openModal(show, rate) {
         );
       });
       // console.log("ticket");
-        fetch(`/ticket`, {method: "POST",body: JSON.stringify({show: show,seatList: seatList,}),});
+        fetch(`/ticket`,{method: "POST",body: JSON.stringify({show: show,seatList: seatList,}),}
+        ).then((response)=> {
+          if(response.status==500){
+            alert('Please Try Again there were some overlapping tickets')
+            // window.location.pathname = "/"
+          }else{
+            window.location.pathname = "/paymentinfo"
+          } 
+         });
   });
 }
