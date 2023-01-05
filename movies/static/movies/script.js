@@ -219,37 +219,11 @@ function openModal(show, rate) {
       document.querySelectorAll(".container > .row").forEach(function (a) {
         a.remove();
       });
-      // all the lines for money
-      let num = 1;
-      // var ulline = document.createElement("div");
-      // ulline.classList.add("verticalLine");
-      // ulline.setAttribute("id", "ull");
-      // var urline = document.createElement("div");
-      // urline.setAttribute("id", "url");
-      // urline.classList.add("urli");
-      // var dlline = document.createElement("div");
-      // dlline.setAttribute("id", "dll");
-      // dlline.classList.add("dvl");
-      // var drline = document.createElement("div");
-      // drline.setAttribute("id", "drl");
-      // drline.classList.add("drli");
-
-      
+     
       for ([seatRow, seatsList] of Object.entries(seats)) {
-        // console.log("Hi i am here")
-        // console.log(seatRow);
+
         var container = document.querySelector(".container");
-        // if (num == 1) {
-        //   container.appendChild(ulline);
-        //   container.appendChild(urline);
-        //   container.appendChild(dlline);
-        //   container.appendChild(drline);
-        //   document.getElementById("ull").innerHTML = `180`;
-        //   document.getElementById("url").innerHTML = `180`;
-        //   document.getElementById("dll").innerHTML = `200`;
-        //   document.getElementById("drl").innerHTML = `200`;
-        //   num = 2;
-        // }conso
+
         var row = document.createElement("div");
         row.classList.add("row");
         row.classList.add(`${seatRow}`);
@@ -314,10 +288,6 @@ function openModal(show, rate) {
         
         row.appendChild(r1_n);
         r1_n.innerHTML = `${seatRow}`;
-
-
-
-
       }
     });
 
@@ -332,13 +302,11 @@ function openModal(show, rate) {
       });
       // console.log("ticket");
         fetch(`/ticket`,{method: "POST",body: JSON.stringify({show: show,seatList: seatList,}),}
-        ).then((response)=> {
-          if(response.status==500){
-            alert('Please Try Again there were some overlapping tickets')
-            // window.location.pathname = "/"
-          }else{
-            window.location.pathname = "/paymentinfo"
-          } 
+        ).then((response)=> { 
+          console.log(response.status)
+          if(response.status>=500){
+             alert('Please Try Again there were some overlapping tickets');             
+          }
          });
   });
 }

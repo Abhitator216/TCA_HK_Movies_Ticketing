@@ -164,7 +164,17 @@ class Ticket(models.Model):
 
 def deleteTicket(sender, instance, **kwargs):
     currentShow = Show.objects.get(pk=instance.show.id)
-    currentShow.seats = emptyAllSeats()
+    print(currentShow.seats)
+    print(instance.seat)
+    # currentShow.seats = emptyAllSeats()
+    alls=currentShow.seats
+    deli=instance.seat
+    for del_list in deli['seatList']:
+        ch=del_list[0]  #G
+        num=del_list[1:] #20    
+        key_dict= alls[ch]
+        key_dict[num]='Vacant'
+    currentShow.seats=alls    
     currentShow.save()
     
 
