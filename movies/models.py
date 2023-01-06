@@ -90,6 +90,9 @@ class Show(models.Model):
     date = models.DateField()
     time = models.TimeField()
     rate = models.IntegerField()
+    rate2 = models.IntegerField(null=True)
+    rate3 = models.IntegerField(null=True)
+    alpha_range=models.CharField(max_length=2,null=True)
 
     def serialize(self):
         return {
@@ -103,7 +106,10 @@ class Show(models.Model):
             "time": self.time,
             "time_display": self.time,
             "current_time": localtime().time(),
-            "rate": self.rate
+            "rate": self.rate,
+            "rate2":self.rate2,
+            "rate3":self.rate3,
+            "alpha_range":self.alpha_range,
         }
 
     def __str__(self):

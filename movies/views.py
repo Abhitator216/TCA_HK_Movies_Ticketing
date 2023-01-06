@@ -30,7 +30,7 @@ def export_to_csv(request):
 
 
     # for game in games:
-    #     scores = game.score_set.all().values_list('score',
+    #     scores = game.scors_set.all().values_list('score',
     #                                             'date_played')
     #     writer.writerow(game)
 
@@ -114,7 +114,9 @@ def register(request):
 @login_required
 def index(request):
     allMovies = list(Movie.objects.all())
-    random_movies = random.sample(allMovies, 1)
+    if(len(allMovies)>0):
+        random_movies = random.sample(allMovies, 1)
+    else: random_movies=random.sample(allMovies, 0)
     return render(request, "movies/index.html", {"random_movies": random_movies})
 
 def paymentinfo(request):
@@ -231,12 +233,17 @@ def ticket(request):
         data = json.loads(request.body)
         
         current_show = Show.objects.get(pk=data.get("show"))
-
+        range1 = current_show.alpha_range[0]
+        range2 = current_show.alpha_range[1]
+        cost1 =  current_show.rate
+        cost2 =  current_show.rate2
+        cost3 =  current_show.rate3
         row = ''
         col = ''
         total_seats = 0
-        c_s = 0
-        e_s = 0
+        f_s = 0
+        s_s = 0
+        t_s = 0
         flag =1
         for seat in data.get("seatList"):
             row = seat[0]
@@ -255,10 +262,12 @@ def ticket(request):
                 current_show.seats[row][col] = 'Occupied'
                 current_show.save()
                 total_seats+=1
-                if row<='F':
-                    c_s +=1
-                else : e_s+=1
-            cost = c_s*(current_show.rate-20) + e_s*(current_show.rate)
+                if row<=range1:
+                    f_s +=1
+                elif row>range1 and row<=range2:
+                    s_s+=1
+                else : t_s+=1
+            cost = f_s*(cost1) + s_s*(cost2)+t_s*(cost3)
             Ticket.objects.create(user=request.user, seat={'seatList':data.get("seatList")}, show=current_show, cost=cost)
             Ticketlog.objects.create(
             username=request.user.first_name, 

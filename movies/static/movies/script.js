@@ -16,12 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (show.date > show.today) {
           document.querySelectorAll(".book")[
             i
-          ].href = `javascript:openModal(${show.id}, ${show.rate})`;
+          ].href = `javascript:openModal(${show.id}, '${show.alpha_ran}',${show.rate}, ${show.rate2}, ${show.rate3})`;
           i++;
         } else if (show.date == show.today && show.time > show.current_time) {
           document.querySelectorAll(".book")[
             i
-          ].href = `javascript:openModal(${show.id}, ${show.rate})`;
+          ].href = `javascript:openModal(${show.id},'${show.alpha_ran}', ${show.rate}, ${show.rate2}, ${show.rate3})`;
           i++;
         } else {
         }
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             a.remove();
           });
           // console.log(shows);
+          console.log(shows)
           shows.forEach(function (show) {
             // const show.today = new Date();
 
@@ -65,7 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
               // a.title = show.time_display;
               a.title = "Select Seat/s";
               a.className = "book";
-              a.href = `javascript:openModal(${show.id}, ${show.rate})`;
+              
+              console.log(show.id, show.rate, show.rate2, show.rate3, show.alpha_range);
+              
+              a.href = `javascript:openModal(${show.id}, '${show.alpha_range}', ${show.rate}, ${show.rate2} ,${show.rate3})`;
 
               cell1.innerHTML = show.theatre;
               cell2.innerHTML = `${show.rate} HK\$/-`;
@@ -93,7 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
               // a.title = show.time_display;
               a.title = "Select Seat/s";
               a.className = "book";
-              a.href = `javascript:openModal(${show.id}, ${show.rate})`;
+              
+              
+              console.log(show.id, show.rate, show.rate2, show.rate3, show.alpha_range);
+              a.href = `javascript:openModal(${show.id}, '${show.alpha_range}', ${show.rate}, ${show.rate2}, ${show.rate3})`;
 
               cell1.innerHTML = show.theatre;
               cell2.innerHTML = `${show.rate} HK\$/-`;
@@ -145,24 +152,23 @@ document.addEventListener("DOMContentLoaded", () => {
         ".container > .row > .selected"
       );
 
-      var cheap_seats = document.querySelectorAll(
-        ".container > .row > .selected.cheap"
+      var first_class1_seats = document.querySelectorAll(
+        ".container > .row > .selected.first_class1"
       );
-      var exp_seats = document.querySelectorAll(
-        ".container > .row > .selected.exp"
+      var second_class2_seats = document.querySelectorAll(
+        ".container > .row > .selected.second_class2"
       );
-      var selcted_row = document.querySelectorAll(
-        ".container > .row > .selected"
+      var third_class3_seats = document.querySelectorAll(
+        ".container > .row > .selected.third_class3"
       );
       // console.log(selcted_row);
 
 
-      var totalSeatCost =
-        cheap_seats.length * (cost - 20) + exp_seats.length * cost;
+      var totalSeatCost = first_class1_seats.length * (cost) + second_class2_seats.length * (cost2) + third_class3_seats.length*(cost3);
         
         
         var mylist,mylist2;
-        let s=""
+        var s=""
         for ([seatRow, seatsList] of Object.entries(seatNumber)) {
             mylist=seatsList.classList[1];
             mylist2=seatsList.classList[3];
@@ -209,53 +215,84 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function openModal(show, rate) {
+function openModal(show,range_ran,rate,rate2,rate3) {
   cost = rate;
+  cost2 = rate2;
+  cost3 = rate3;
+  console.log(range_ran);
+  end_rate1=range_ran[0];
+  end_rate2=range_ran[1];
+
+  console.log(end_rate1,end_rate2)
+  console.log("hiii")
   document.getElementById("simpleModal").style.display = "flex";
-  // console.log(`/seats/${show}`);
   fetch(`/seats/${show}`)
-    .then((response) => response.json())
-    .then((seats) => {
-      document.querySelectorAll(".container > .row").forEach(function (a) {
-        a.remove();
-      });
-     
+  .then((response) => response.json())
+  .then((seats) => {
+    document.querySelectorAll(".container > .row").forEach(function (a) {
+      a.remove();
+    });
+         
+   
+
+     var num=1;
+     var range1=range_ran.codePointAt(0);
+     range1++
+     var real_range1=String.fromCharCode(range1)
+     var range2=range_ran.codePointAt(1);
+     range2++
+     var real_range2=String.fromCharCode(range2)
+     console.log(real_range1,real_range2)
       for ([seatRow, seatsList] of Object.entries(seats)) {
 
         var container = document.querySelector(".container");
-
+        var price_div0 = document.createElement("div");
+        if (num==1){
+          container.appendChild(price_div0);
+          price_div0.innerHTML = ` ${cost} HK\$`;
+          price_div0.classList.add("price_divv0");
+          num++;
+        }
+        // for every row
         var row = document.createElement("div");
         row.classList.add("row");
-        row.classList.add(`${seatRow}`);
+        //make a new div for showing the rate
+        var price_div1 = document.createElement("div");
+        var price_div2 = document.createElement("div");
+        
+        container.appendChild(price_div2);
 
+        console.log(real_range1);
+
+        if (seatRow == real_range1) {
+          container.appendChild(price_div1);
+          price_div1.innerHTML = ` ${cost2} HK\$`;
+          price_div1.classList.add("price_divv1");
+        }
+        if (seatRow == real_range2 && real_range2!='Q') {
+          container.appendChild(price_div2);
+          price_div2.innerHTML = ` ${cost3} HK\$`;
+          price_div2.classList.add("price_divv2");
+        }
+      
+        
+        
+        row.classList.add(`${seatRow}`);    
+        // For row name (A,B,C,D)
         var r_n = document.createElement("div");
         r_n.classList.add("row_number");
-
-        
+        //Container k andar row wala div        
         container.appendChild(row);
+        //first div for A,B,C,D
         row.appendChild(r_n);
-        r_n.innerHTML = `${seatRow}`;
+        r_n.innerHTML = `${seatRow}`;        
         
-
+        
+        
         for ([number, vacancy] of Object.entries(seatsList)) {
           var seat = document.createElement("div");
 
           if (
-            seatRow == "B" ||
-            (`${number}` == 13 && seatRow != "Q") ||
-            (seatRow == "C" &&
-              `${number}` != 5 &&
-              seatRow == "C" &&
-              `${number}` != 6 &&
-              seatRow == "C" &&
-              `${number}` != 7 &&
-              seatRow == "C" &&
-              `${number}` != 8 &&
-              seatRow == "C" &&
-              `${number}` != 9)
-          ) {
-            seat.classList.add("notavail");
-          } else if (
             (seatRow == "B" && `${number}` == 19) ||
             (seatRow == "D" && `${number}` == 19) ||
             (seatRow == "F" && `${number}` == 19) ||
@@ -263,7 +300,7 @@ function openModal(show, rate) {
             (seatRow == "J" && `${number}` == 19) ||
             (seatRow == "L" && `${number}` == 19) ||
             (seatRow == "N" && `${number}` == 19) ||
-            (seatRow == "P" && `${number}` == 19)
+            (seatRow == "P" && `${number}` == 19) || ((seatRow=="Q")&&((`${number}` == 1)||(`${number}` == 2)||(`${number}` == 3)||(`${number}` == 5)||(`${number}` == 6)||(`${number}` == 7)||(`${number}` == 20)||(`${number}` == 21)))
           ) {
             seat.classList.add("notavail");
             seat.classList.add("notthere");
@@ -274,13 +311,24 @@ function openModal(show, rate) {
               seat.classList.add("occupied");
             }
           }
-          if (seatRow <= "F") {
-            seat.classList.add("cheap");
-          } else seat.classList.add("exp");
+          // console.log(seatRow,real_range1,real_range2)
+          if (seatRow <= end_rate1) {
+            seat.classList.add("first_class1");
+            // console.log("First class hu ")
+          } 
+          else if (seatRow > end_rate1 && seatRow <= end_rate2){
+            seat.classList.add("second_class2");
+            // console.log("second class hu ")
+          }else {
+            // console.log("third class hu ")
+            seat.classList.add("third_class3");
+          }
+          
           
           seat.classList.add(seatRow);
           row.appendChild(seat);
         }
+        // console.log(cost3);
         var r1_n = document.createElement("div");
         r1_n.classList.add("row_right_number");
 
