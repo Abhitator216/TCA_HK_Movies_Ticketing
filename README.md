@@ -4,7 +4,7 @@ Movie Time is a responsive movie booking website written in Python and Javascrip
 ___
 ### Login/Register Page:
 - Page for logging in.
-![image](https://github.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/1.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/1.jpg)
 
 - Register Page has a similar layout. 
 - The **city select** input field options are generated from exsting cities inside the database.
