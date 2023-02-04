@@ -14,24 +14,24 @@ ___
 - Home page of the applicaton. 
 - Top of the page has navbar which is available across the pages once logged in. 
 - Bottom of the page has a section which displays 3 random movies from the database.
-![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/3.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/3.jpg)
 
 ### Movies Page:
 - Lists all the movie posters in the database in a Masonry Layout.
 - Same page acts as a search results page for the search bar in the navbar above.
-![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/4.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/4.jpg)
 
 ### Bookings Page:
 - Lists all the bookings made by the user in a ticket styled layout. 
 - The above section lists upcoming bookings while the bottom section books past bookings.
 - Upcoming booking automatically gets shifted to past booking section once the show time has arrived.
-![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/5.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/5.jpg)
 
 ### Movie Entry Page:
 - Page belonging to each movie in the database.
 - Displays the poster and the synopsis for the movie.
 - Button below synopsis is used to make a booking.
-![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/6.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/6.jpg)
 
 ### Movie Book/Seat Selection Page:
 - Books seat for the movie whose page user visited.
@@ -42,11 +42,11 @@ ___
 - Upon selection the user is then taken to the Bookings Page where the details of the ticket are mentioned.
 - Upon subsequent visits, the particular seat booked by the user becomes unclickable.
 - Once the show reaches it's time, it automatically gets unlisted from future searches.
-![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/7.jpg)
-![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/8.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/7.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/8.jpg)
 
 ### Payment Information Page:
-![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/tree/main/FinalProject/documents/9.jpg)
+![image](https://raw.githubusercontent.com/Abhitator216/TCA_HK_Movies_Ticketing/main/FinalProject/documents/9.jpg)
 ### Admin Responsibilities:
 - Admins are responsible for creation of objects of type Cities, Theatres and Movies using the Django Admin Interface. 
 - Creation of a theatre automatically creates 4 objects (2d, 3d, 4dx, imax) in Hall class having that theatre as forein key.
