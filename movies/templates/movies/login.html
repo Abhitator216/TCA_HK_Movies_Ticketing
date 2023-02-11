@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'movies/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'movies/style.css' %}" />
 
     <title>Login</title>
   </head>
@@ -16,11 +17,12 @@
       <a href="{% url 'login' %}">
         <img
           src="{% static 'movies/logo.png' %}"
-          style="    width: 16em;
-          margin-bottom: 1em;
-          margin-top: 0.5em;
-          margin-left: 2.5em;
-      "
+          style="
+            width: 16em;
+            margin-bottom: 1em;
+            margin-top: 0.5em;
+            margin-left: 2.5em;
+          "
       /></a>
 
       <div class="rightForm">
@@ -51,10 +53,28 @@
 
           <input type="submit" name="" value="Submit" />
         </form>
-        <a href="{% url 'register' %}">Don't have an account?</a>
-        <div class="d-flex flex-column my-4">
-					<a class="m-auto" href="{% url 'password_reset' %}">Reset password</a>
-				</div>
+<div class="muh">
+  <div style="width: 80%;">
+          <button class="pbtn" >
+          <a href="{% url 'register' %}">Don't have an account?</a>
+        </button>
+        </div>
+        <br>
+        <div class="d-flex flex-column my-4" style="width: 80%;">        
+        <button class="pbtn">
+            <a class="m-auto" href="{% url 'password_reset' %}"
+              >Forgot password?</a></button>
+          </div>
+</div>
+        <!-- <style>
+          .muh{
+            background-color: green;
+            display: flex;
+            justify-content: space-between ;
+            width: 100%;
+          }
+        </style> -->
+        
       </div>
     </div>
   </body>

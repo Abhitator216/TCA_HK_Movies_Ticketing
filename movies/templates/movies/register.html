@@ -6,6 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'movies/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'movies/style.css' %}" />
+    <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -45,11 +51,7 @@
                 <label>Email</label>
             </div>
 
-            <div class="inputBox">
-                <input type="number" name="phone_no" autocomplete="off" required>
-                <label>Phone Number</label>
-            </div>
-
+           
             <div class="inputBox">
                 <input type="password" name="password" required>
                 <label>Password</label>
@@ -68,11 +70,24 @@
                     {% endfor %}
                 </select>
             </div>
+            <div class="inputBox">
+                <input id="phone" type="tel" name="phone_no" autocomplete="off" required>
+                <label></label>
+            </div>
+            <br>
 
             <input type="submit" name="" value="Submit">
         </form>
-        <a href="{% url 'login' %}">Already have an account?</a>
+        <a href="{% url 'login' %}" class="pbtn">Already have an account?</a>
     </div>
     </div>
+    <script>
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            // preferredCountries: ["hk"],
+          utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+      </script>
 </body>
 </html>

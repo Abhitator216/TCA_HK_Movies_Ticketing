@@ -290,7 +290,7 @@ section {
 
 .welcomeText h1{
     margin: 0;
-    font-size: 100px;
+    font-size: 60px;
     margin-bottom: 20px;
     color: #ffffff;
     background: #00000000;
@@ -471,7 +471,7 @@ section .wave:after {
 
 @media screen and (max-width: 400px) {
     .rightForm{
-        width: 80%;
+        width: 92%;
         padding: 80px;
         height: fit-content;
     }
